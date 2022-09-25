@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Dispatcher" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="390,1951" sap2010:WorkflowViewState.IdRef="Dispatcher_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Dispatcher" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="573,2146" sap2010:WorkflowViewState.IdRef="Dispatcher_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="37">
       <x:String>System.Activities</x:String>
@@ -71,17 +71,18 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Dispatcher" sap:VirtualizedContainerService.HintSize="382,1886" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Dispatcher" sap:VirtualizedContainerService.HintSize="551,2081" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strTenantId" />
       <Variable x:TypeArguments="x:String" Name="strAppId" />
       <Variable x:TypeArguments="x:String" Name="strSecretClient" />
       <Variable x:TypeArguments="x:String" Name="AuthToken" />
-      <Variable x:TypeArguments="x:String" Name="jsonUsers" />
+      <Variable x:TypeArguments="x:String" Name="jsonSignins" />
       <Variable x:TypeArguments="njl:JObject" Name="jsonAuthToken" />
-      <Variable x:TypeArguments="njl:JObject" Name="jsonUsersDeserialized" />
+      <Variable x:TypeArguments="njl:JObject" Name="jsonSigninsDeserialized" />
       <Variable x:TypeArguments="x:Int32" Default="0" Name="intIndex" />
       <Variable x:TypeArguments="x:String" Name="strGroupId" />
       <Variable x:TypeArguments="x:String" Name="ArrJsonUsers" />
@@ -93,23 +94,23 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message dispatcher start" sap:VirtualizedContainerService.HintSize="340,106" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Dispatching data to orquestrator....&quot;]" />
-    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="TenantId" DisplayName="Get TenantId" sap:VirtualizedContainerService.HintSize="340,137" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+    <ui:LogMessage DisplayName="Log message dispatcher start" sap:VirtualizedContainerService.HintSize="509,106" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Dispatching data to orquestrator....&quot;]" />
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="TenantId" DisplayName="Get TenantId" sap:VirtualizedContainerService.HintSize="509,137" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
       <ui:GetRobotAsset.Value>
         <OutArgument x:TypeArguments="x:String">[strTenantId]</OutArgument>
       </ui:GetRobotAsset.Value>
     </ui:GetRobotAsset>
-    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="AppId" DisplayName="Get AppId" sap:VirtualizedContainerService.HintSize="340,137" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="AppId" DisplayName="Get AppId" sap:VirtualizedContainerService.HintSize="509,137" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
       <ui:GetRobotAsset.Value>
         <OutArgument x:TypeArguments="x:String">[strAppId]</OutArgument>
       </ui:GetRobotAsset.Value>
     </ui:GetRobotAsset>
-    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="SecretClient" DisplayName="Get ClientSecret" sap:VirtualizedContainerService.HintSize="340,137" sap2010:WorkflowViewState.IdRef="GetRobotAsset_3">
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="SecretClient" DisplayName="Get ClientSecret" sap:VirtualizedContainerService.HintSize="509,137" sap2010:WorkflowViewState.IdRef="GetRobotAsset_3">
       <ui:GetRobotAsset.Value>
         <OutArgument x:TypeArguments="x:String">[strSecretClient]</OutArgument>
       </ui:GetRobotAsset.Value>
     </ui:GetRobotAsset>
-    <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="ANY" AuthenticationType="None" BodyFormat="application/xml" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Graph Auth Token" EnableSSLVerification="True" EndPoint="[&quot;https://login.microsoftonline.com/&quot; + strTenantId + &quot;/oauth2/token&quot;]" sap:VirtualizedContainerService.HintSize="340,57" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" Password="[Nothing]" Result="[AuthToken]" TimeoutMS="6000" Username="[Nothing]">
+    <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="ANY" AuthenticationType="None" BodyFormat="application/xml" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Graph Auth Token" EnableSSLVerification="True" EndPoint="[&quot;https://login.microsoftonline.com/&quot; + strTenantId + &quot;/oauth2/token&quot;]" sap:VirtualizedContainerService.HintSize="509,57" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" Password="[Nothing]" Result="[AuthToken]" TimeoutMS="6000" Username="[Nothing]">
       <ui:HttpClient.Attachments>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Attachments>
@@ -130,8 +131,8 @@
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.UrlSegments>
     </ui:HttpClient>
-    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON Auth" sap:VirtualizedContainerService.HintSize="340,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[jsonAuthToken]" JsonString="[AuthToken]" />
-    <Assign DisplayName="TokenContent" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON Auth" sap:VirtualizedContainerService.HintSize="509,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[jsonAuthToken]" JsonString="[AuthToken]" />
+    <Assign DisplayName="TokenContent" sap:VirtualizedContainerService.HintSize="509,60" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[strAuthToken]</OutArgument>
       </Assign.To>
@@ -139,7 +140,7 @@
         <InArgument x:TypeArguments="x:String">[jsonAuthToken("access_token").ToString]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" BodyFormat="application/xml" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Graph Groups Query" EnableSSLVerification="False" EndPoint="https://graph.microsoft.com/v1.0/auditLogs/signIns" sap:VirtualizedContainerService.HintSize="340,57" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="GET" Password="[Nothing]" Result="[jsonUsers]" TimeoutMS="6000" Username="[Nothing]">
+    <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" BodyFormat="application/xml" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Graph Groups Query" EnableSSLVerification="False" EndPoint="https://graph.microsoft.com/v1.0/auditLogs/signIns" sap:VirtualizedContainerService.HintSize="509,57" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="GET" Password="[Nothing]" Result="[jsonSignins]" TimeoutMS="6000" Username="[Nothing]">
       <ui:HttpClient.Attachments>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Attachments>
@@ -156,29 +157,87 @@
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.UrlSegments>
     </ui:HttpClient>
-    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize User query JSON" sap:VirtualizedContainerService.HintSize="340,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_6" JsonObject="[jsonUsersDeserialized]" JsonString="[jsonUsers]" />
-    <ui:InterruptibleWhile CurrentIndex="{x:Null}" Condition="[intIndex &lt; jsonUsersDeserialized(&quot;value&quot;).Count]" DisplayName="While index it doesn't get the length of the JSON object" sap:VirtualizedContainerService.HintSize="340,479" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize User query JSON" sap:VirtualizedContainerService.HintSize="509,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_6" JsonObject="[jsonSigninsDeserialized]" JsonString="[jsonSignins]" />
+    <ui:InterruptibleWhile CurrentIndex="{x:Null}" DisplayName="While index it doesn't get the length of the JSON object" sap:VirtualizedContainerService.HintSize="509,643" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
       <ui:InterruptibleWhile.Body>
-        <Sequence DisplayName="Get UserId Asign it and add to a Queue" sap:VirtualizedContainerService.HintSize="304,314" sap2010:WorkflowViewState.IdRef="Sequence_9">
+        <Sequence DisplayName="Get UserId Asign it and add to a Queue" sap:VirtualizedContainerService.HintSize="473,478" sap2010:WorkflowViewState.IdRef="Sequence_9">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="strUserPrincipalName" />
+            <Variable x:TypeArguments="x:String" Name="strAppDisplayName" />
+            <Variable x:TypeArguments="x:String" Name="strTelephone" />
+            <Variable x:TypeArguments="x:String" Name="strCreatedDateTime" />
+          </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[strGroupId]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[jsonUsersDeserialized("value")(intIndex)("id").ToString]</InArgument>
-            </Assign.Value>
-          </Assign>
-          <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" FolderPath="Main" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="RPA0003Queue">
+          <ui:MultipleAssign DisplayName="Asignación múltiple" sap:VirtualizedContainerService.HintSize="431,224" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[strGroupId]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[jsonSigninsDeserialized("value")(intIndex)("id").ToString]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[strUserPrincipalName]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[jsonSigninsDeserialized("value")(intIndex)("userPrincipalName").ToString]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[strAppDisplayName]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[jsonSigninsDeserialized("value")(intIndex)("appDisplayName").ToString]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[strAppId]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[jsonSigninsDeserialized("value")(intIndex)("appId").ToString]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[strCreatedDateTime]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[jsonSigninsDeserialized("value")(intIndex)("createdDateTime").ToString]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+          </ui:MultipleAssign>
+          <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" FolderPath="Main" sap:VirtualizedContainerService.HintSize="431,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="RPA0003Queue">
             <ui:AddQueueItem.ItemInformation>
-              <InArgument x:TypeArguments="x:String" x:Key="UserId">[strGroupId]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="userId">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strGroupId" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="userPrincipalName">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strUserPrincipalName" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="appDisplayName">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strAppDisplayName" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="appId">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strAppId" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="createdDateTime">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strCreatedDateTime" />
+              </InArgument>
             </ui:AddQueueItem.ItemInformation>
           </ui:AddQueueItem>
-          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+          <Assign sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_4">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Int32">[intIndex]</OutArgument>
             </Assign.To>
@@ -188,7 +247,10 @@
           </Assign>
         </Sequence>
       </ui:InterruptibleWhile.Body>
+      <ui:InterruptibleWhile.Condition>
+        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="intIndex &lt; jsonSigninsDeserialized(&quot;value&quot;).Count" />
+      </ui:InterruptibleWhile.Condition>
     </ui:InterruptibleWhile>
-    <ui:LogMessage DisplayName="Log message dispatcher finished" sap:VirtualizedContainerService.HintSize="340,106" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Dispatching process finished succesfully....&quot;]" />
+    <ui:LogMessage DisplayName="Log message dispatcher finished" sap:VirtualizedContainerService.HintSize="509,106" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Dispatching process finished succesfully....&quot;]" />
   </Sequence>
 </Activity>
